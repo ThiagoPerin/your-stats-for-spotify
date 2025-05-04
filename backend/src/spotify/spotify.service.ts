@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import axios from 'axios';
 import { TokenResponseDto } from './dto/token-response.dto';
@@ -45,6 +45,21 @@ export class SpotifyService {
                     Authorization:
                         'Basic ' +
                         Buffer.from(`${this.clientId}:${this.clientSecret}`).toString('base64'),
+                },
+            },
+        );
+
+        return response.data;
+    }
+
+    async getUserInfo(token: string): Promise<any> {
+        if (!token) throw new UnauthorizedException('Missing access token');
+
+        const response = await axios.get(
+            `https://api.spotify.com/v1/me`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`,
                 },
             },
         );
