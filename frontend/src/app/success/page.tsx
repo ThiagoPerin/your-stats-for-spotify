@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 
 function Teste() {
     const searchParams = useSearchParams();
-    const token = searchParams.get("code");
+    const token = searchParams.get("access_token") || "";
     console.log(token);
 
     return (
