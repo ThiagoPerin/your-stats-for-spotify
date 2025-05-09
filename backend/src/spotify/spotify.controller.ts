@@ -14,15 +14,12 @@ export class SpotifyController {
 
     @Get('callback')
     async callback(@Query('code') code: string, @Res() res: Response) {
-        const tokens = await this.spotifyService.getTokens(code);
-        return res.redirect(`/success?access_token=${tokens.access_token}`);
+        const sessionId = await this.spotifyService.getTokens(code);
+        return res.redirect(`/success?session_id=${sessionId}`);
     }
 
-    @Get('user/:token')
-    async getUser(
-        @Param('token') token: string,
-    ) {
-        console.log("chamaro no token: " + token)
-        return this.spotifyService.getUserInfo(token);
+    @Get('user/:sessionId')
+    async getUser(@Param('sessionId') sessionId: string) {
+        return this.spotifyService.getUserInfo(sessionId);
     }
 }
