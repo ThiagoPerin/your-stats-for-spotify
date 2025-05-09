@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <div className="w-screen h-screen bg-black flex items-center justify-center">
-        <Button className="bg-[#81b71a]" onClick={() => router.push("/spotify/login")}>Start This Adventure</Button>
+        <Button className="bg-[#81b71a]" onClick={() => router.push("/spotify/auth/login")}>Start This Adventure</Button>
       </div>
     </>
   );
