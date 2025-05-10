@@ -1,4 +1,7 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
+import { SpotifyUserProfile } from '@shared/types/spotify-user-info.types';
+import { SpotifyUserTopArtists } from '@shared/types/spotify-user-top-artists.types';
+import { SpotifyUserTopTracks } from '@shared/types/spotify-user-top-tracks.types';
 import axios from 'axios';
 import Redis from 'ioredis';
 
@@ -8,7 +11,7 @@ export class ApiService {
         @Inject('REDIS_CLIENT') private readonly redisClient: Redis,
     ) { }
 
-    async getUserInfo(sessionId: string): Promise<any> {
+    async getUserInfo(sessionId: string): Promise<SpotifyUserProfile> {
         const sessionData = await this.redisClient.get(`spotify:${sessionId}`);
         if (!sessionData) throw new UnauthorizedException('Session expired or invalid');
         const { access_token } = JSON.parse(sessionData);
@@ -20,7 +23,7 @@ export class ApiService {
         return response.data;
     }
 
-    async getUserTopArtists(sessionId: string, limit: number): Promise<any> {
+    async getUserTopArtists(sessionId: string, limit: number): Promise<SpotifyUserTopArtists> {
         const sessionData = await this.redisClient.get(`spotify:${sessionId}`);
         if (!sessionData) throw new UnauthorizedException('Session expired or invalid');
         const { access_token } = JSON.parse(sessionData);
@@ -35,7 +38,7 @@ export class ApiService {
         return response.data;
     }
 
-    async getUserTopTracks(sessionId: string, limit: number): Promise<any> {
+    async getUserTopTracks(sessionId: string, limit: number): Promise<SpotifyUserTopTracks> {
         const sessionData = await this.redisClient.get(`spotify:${sessionId}`);
         if (!sessionData) throw new UnauthorizedException('Session expired or invalid');
         const { access_token } = JSON.parse(sessionData);
