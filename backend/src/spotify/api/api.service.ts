@@ -9,12 +9,42 @@ export class ApiService {
     ) { }
 
     async getUserInfo(sessionId: string): Promise<any> {
-        const data = await this.redisClient.get(`spotify:${sessionId}`);
-        if (!data) throw new UnauthorizedException('Session expired or invalid');
-        const { access_token } = JSON.parse(data);
+        const sessionData = await this.redisClient.get(`spotify:${sessionId}`);
+        if (!sessionData) throw new UnauthorizedException('Session expired or invalid');
+        const { access_token } = JSON.parse(sessionData);
         const response = await axios.get('https://api.spotify.com/v1/me', {
             headers: {
                 Authorization: `Bearer ${access_token}`,
+            },
+        });
+        return response.data;
+    }
+
+    async getUserTopArtists(sessionId: string, limit: number): Promise<any> {
+        const sessionData = await this.redisClient.get(`spotify:${sessionId}`);
+        if (!sessionData) throw new UnauthorizedException('Session expired or invalid');
+        const { access_token } = JSON.parse(sessionData);
+        const response = await axios.get('https://api.spotify.com/v1/me/top/artists', {
+            headers: {
+                Authorization: `Bearer ${access_token}`,
+            },
+            params: {
+                limit: limit,
+            },
+        });
+        return response.data;
+    }
+
+    async getUserTopTracks(sessionId: string, limit: number): Promise<any> {
+        const sessionData = await this.redisClient.get(`spotify:${sessionId}`);
+        if (!sessionData) throw new UnauthorizedException('Session expired or invalid');
+        const { access_token } = JSON.parse(sessionData);
+        const response = await axios.get('https://api.spotify.com/v1/me/top/tracks', {
+            headers: {
+                Authorization: `Bearer ${access_token}`,
+            },
+            params: {
+                limit: limit,
             },
         });
         return response.data;
