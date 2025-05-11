@@ -1,18 +1,52 @@
 import { SpotifyUserProfile } from "@/types/spotify-user-info.types";
+import { SpotifyUserTopArtists } from "@/types/spotify-user-top-artists.types";
+import { SpotifyUserTopTracks } from "@/types/spotify-user-top-tracks.types";
 
 export class UserServices {
     static async fetchUserProfile(sessionId: string): Promise<SpotifyUserProfile | null> {
         try {
-            const response = await fetch(`/spotify/sessions/${sessionId}/user`);
+            const res = await fetch(`/spotify/sessions/${sessionId}/user`);
 
-            if (!response.ok) {
-                throw new Error(`Erro ao buscar usuário: ${response.status} ${response.statusText}`);
+            if (!res.ok) {
+                throw new Error(`Failed to fetch user profile: ${res.status} ${res.statusText}`);
             }
 
-            const data: SpotifyUserProfile = await response.json();
+            const data: SpotifyUserProfile = await res.json();
             return data;
         } catch (error) {
-            console.error('Erro em fetchUserProfile:', error);
+            console.error('Error in fetchUserProfile:', error);
+            return null;
+        }
+    }
+
+    static async fetchUserTopArtists(sessionId: string, limit: number): Promise<SpotifyUserTopArtists | null> {
+        try {
+            const res = await fetch(`/spotify/sessions/${sessionId}/top/artists?limit=${limit}`);
+
+            if (!res.ok) {
+                throw new Error(`Failed to fetch top artists: ${res.status} ${res.statusText}`);
+            }
+
+            const data: SpotifyUserTopArtists = await res.json();
+            return data;
+        } catch (error) {
+            console.error('Error in fetchUserTopArtists:', error);
+            return null;
+        }
+    }
+
+    static async fetchUserTopTracks(sessionId: string, limit: number): Promise<SpotifyUserTopTracks | null> {
+        try {
+            const res = await fetch(`/spotify/sessions/${sessionId}/top/tracks?limit=${limit}`);
+
+            if (!res.ok) {
+                throw new Error(`Failed to fetch top tracks: ${res.status} ${res.statusText}`);
+            }
+
+            const data: SpotifyUserTopTracks = await res.json();
+            return data;
+        } catch (error) {
+            console.error('Error in fetchUserTopArtists:', error);
             return null;
         }
     }
