@@ -1,7 +1,7 @@
 import { Inject, Injectable, UnauthorizedException } from '@nestjs/common';
-import { SpotifyUserProfile } from '@shared/types/spotify-user-info.types';
-import { SpotifyUserTopArtists } from '@shared/types/spotify-user-top-artists.types';
-import { SpotifyUserTopTracks } from '@shared/types/spotify-user-top-tracks.types';
+import { SpotifyUserProfile } from 'src/types/spotify-user-info.types';
+import { SpotifyUserTopArtists } from 'src/types/spotify-user-top-artists.types';
+import { SpotifyUserTopTracks } from 'src/types/spotify-user-top-tracks.types';
 import axios from 'axios';
 import Redis from 'ioredis';
 
