@@ -127,3 +127,16 @@
     @apply bg-background text-foreground;
   }
 }
+
+
+.colored-gradient-1 {
+  background-color: #df99ff;
+  background-image:
+    radial-gradient(at 86% 32%, hsla(282, 77%, 72%, 1) 0px, transparent 50%),
+    radial-gradient(at 15% 68%, hsla(264, 98%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 6% 81%, hsla(6, 79%, 70%, 1) 0px, transparent 50%),
+    radial-gradient(at 7% 4%, hsla(3, 75%, 61%, 1) 0px, transparent 50%),
+    radial-gradient(at 56% 96%, hsla(93, 85%, 71%, 1) 0px, transparent 50%),
+    radial-gradient(at 91% 75%, hsla(332, 70%, 73%, 1) 0px, transparent 50%),
+    radial-gradient(at 63% 76%, hsla(203, 92%, 64%, 1) 0px, transparent 50%);
+}
