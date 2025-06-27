@@ -4,6 +4,7 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
+  --color-translucent-black: var(--translucent-black);
   --color-spotify-black: var(--spotify-black);
   --color-spotify-white: var(--spotify-white);
   --color-spotify-green: var(--spotify-green);
@@ -48,6 +49,7 @@
 
 :root {
   --radius: 0.625rem;
+  --translucent-black: #12121273;
   --spotify-black: #121212;
   --spotify-white: #ffffff;
   --spotify-green: #1ED760;
