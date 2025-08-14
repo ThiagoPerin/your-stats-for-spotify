@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { SpotifyUserProfile } from "@/types/spotify-user-info.types";
 import { UserServices } from "@/services/userServices";
 import { SpotifyUserTopArtists } from "@/types/spotify-user-top-artists.types";
+import Image from "next/image";
 import { SpotifyUserTopTracks } from "@/types/spotify-user-top-tracks.types";
 
 function Teste() {
@@ -36,30 +37,37 @@ function Teste() {
 
 
     return (
-        <div className="w-screen h-screen bg-black flex flex-col items-center justify-center">
-            <div className="text-white text-6xl">You are logged in !!!!</div>
-            <div className="text-white text-sm text-center">Your session_id is {session_id}</div>
-            {userData ? (
-                <div className="text-white text-center mt-4">
-                    {JSON.stringify(userData)}
+        <div className="w-screen h-screen colored-gradient-1 flex flex-col items-center gap-2">
+            <div className="h-fit w-full flex items-center justify-between p-2 bg-translucent-black">
+                {userData &&
+                    <>
+                        <div className="text-white text-xl">{userData.display_name}</div>
+                        <Image src={userData.images[0].url} alt="Spotify Primary Logo" height={60} width={60} className="rounded-full" />
+                    </>
+                }
+            </div>
+            <div className="w-full flex gap-2 p-2">
+                <div className="text-white text-xl bg-translucent-black p-2 rounded-2xl">
+                    <div className="text-black">Top Artists</div>
+                    <ul>
+                        {userTopArtists &&
+                            userTopArtists.items.map((artist) => (
+                                <li key={artist.id}>{artist.name}</li>
+                            ))
+                        }
+                    </ul>
                 </div>
-            ) : (
-                <div className="text-white text-center mt-4">Failed to load user data</div>
-            )}
-            {userTopArtists ? (
-                <div className="text-white text-center mt-4">
-                    {JSON.stringify(userTopArtists)}
+                <div className="text-white text-xl bg-translucent-black p-2 rounded-2xl">
+                    <div className="text-black">Top Tracks</div>
+                    <ul>
+                        {userTopTracks &&
+                            userTopTracks.items.map((track) => (
+                                <li key={track.id}>{track.name}</li>
+                            ))
+                        }
+                    </ul>
                 </div>
-            ) : (
-                <div className="text-white text-center mt-4">Failed to load user data</div>
-            )}
-            {userTopTracks ? (
-                <div className="text-white text-center mt-4">
-                    {JSON.stringify(userTopTracks)}
-                </div>
-            ) : (
-                <div className="text-white text-center mt-4">Failed to load user data</div>
-            )}
+            </div>
         </div>
     );
 }
