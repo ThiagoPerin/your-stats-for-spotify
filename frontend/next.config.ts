@@ -7,6 +7,14 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/spotify/:path*',
+        destination: 'http://localhost:3000/spotify/:path*',
+      }
+    ];
+  },
 };
 
 export default nextConfig;
