@@ -8,6 +8,14 @@
   --color-spotify-black: var(--spotify-black);
   --color-spotify-white: var(--spotify-white);
   --color-spotify-green: var(--spotify-green);
+  --color-sp-base: var(--sp-base);
+  --color-sp-surface: var(--sp-surface);
+  --color-sp-elevated: var(--sp-elevated);
+  --color-sp-highlight: var(--sp-highlight);
+  --color-sp-text: var(--sp-text);
+  --color-sp-subdued: var(--sp-subdued);
+  --color-sp-track: var(--sp-track);
+  --color-sp-chart: var(--sp-chart);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -53,6 +61,14 @@
   --spotify-black: #121212;
   --spotify-white: #ffffff;
   --spotify-green: #1ED760;
+  --sp-base: #ffffff;
+  --sp-surface: #f6f6f6;
+  --sp-elevated: #ededed;
+  --sp-highlight: #e4e4e4;
+  --sp-text: #121212;
+  --sp-subdued: #5e5e5e;
+  --sp-track: #dcdcdc;
+  --sp-chart: #117a37;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);
@@ -87,6 +103,14 @@
 }
 
 .dark {
+  --sp-base: #121212;
+  --sp-surface: #181818;
+  --sp-elevated: #1f1f1f;
+  --sp-highlight: #2a2a2a;
+  --sp-text: #ffffff;
+  --sp-subdued: #b3b3b3;
+  --sp-track: #3a3a3a;
+  --sp-chart: #18a84b;
   --background: oklch(0.129 0.042 264.695);
   --foreground: oklch(0.984 0.003 247.858);
   --card: oklch(0.208 0.042 265.755);
